@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brawler Upgrade Calculator</title>
+    <style>
+        /* Brawl Stars Theme Colors */
+        :root {
+            --primary-color: #ffcc00; /* Brawl Stars Yellow */
+            --secondary-color: #003366; /* Brawl Stars Blue */
+            --background-color: #1e1e1e; /* Dark background */
+            --accent-color: #ff6600; /* Orange Accent */
+            --text-color: #ffffff; /* White Text */
+            --font-family: 'Brawl Stars', sans-serif; /* Brawl Stars Font */
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+        body {
+            font-family: 'Bangers', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .calculator h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .calculator label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .calculator select,
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result p {
+            margin: 10px 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result img {
+            width: 24px;
+            margin: 0 8px;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
+        }
+
+        /* Media Query for Responsive Design */
+        @media (max-width: 400px) {
+            .calculator {
+                width: 90%;
+                padding: 15px;
+            }
+
+            .calculator h1 {
+                font-size: 20px;
+            }
+
+            .calculator label,
+            .calculator input,
+            .calculator select,
+            .calculator button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="logo">
+            <img src="brawls-starsLogo.png" alt="Brawl Stars Logo">
+        </div>
+
+        <h1>Brawler Upgrade Calculator</h1>
+
+        <label for="brawler">Select Brawler:</label>
+        <select id="brawler">
+            <option>Shelly</option>
+            <option>Colt</option>
+            <option>Spike</option>
+            <option>Bull</option>
+            <option>Jacky</option>
+            <option>Pearl</option>
+            <option>Rosa</option>
+            <option>Maisie</option>
+            <option>Lou</option>
+            <option>Colette</option>
+            <option>Charlie</option>
+            <option>Dynamike</option>
+            <option>Edgar</option>
+            <option>Fang</option>
+            <option>Leon</option>
+            <option>Crow</option>
+            <option>Mico</option>
+            <option>Cordelius</option>
+            <option>Kenji</option>
+            <option>Moe</option>
+            <option>Clancy</option>
+            <option>Berry</option>
+            <option>Lily</option>
+            <option>Draco</option>
+            <option>Angelo</option>
+            <option>Melodie</option>
+            <option>Larry & Lawrie</option>
+            <option>Kit</option>
+            <option>Chuck</option>
+            <option>Doug</option>
+            <option>Hank</option>
+            <option>Willow</option>
+            <option>R-T</option>
+            <option>Mandy</option>
+            <option>Gray</option>
+            <option>Chester</option>
+            <option>Buster</option>
+            <option>Gus</option>
+            <option>Sam</option>
+            <option>Otis</option>
+            <option>Bonnie</option>
+            <option>Janet</option>
+            <option>Eve</option>
+            <option>Lola</option>
+            <option>Meg</option>
+            <option>Ash</option>
+            <option>Griff</option>
+            <option>Buzz</option>
+            <option>Grom</option>
+            <option>Squeak</option>
+            <option>Belle</option>
+            <option>Stu</option>
+            <option>Ruffs</option>
+            <option>Byron</option>
+            <option>Amber</option>
+            <option>Surge</option>
+            <option>Sprout</option>
+            <option>Nani</option>
+            <option>Gale</option>
+            <option>Max</option>
+            <option>Mr. P</option>
+            <option>Emz</option>
+            <option>Bea</option>
+            <option>Sandy</option>
+            <option>8-Bit</option>
+            <option>Bibi</option>
+            <option>Carl</option>
+            <option>Leon</option>
+            <option>Tick</option>
+            <option>Gene</option>
+            <option>Frank</option>
+            <option>Penny</option>
+            <option>Darryl</option>
+            <option>Tara</option>
+            <option>Pam</option>
+            <option>Piper</option>
+            <option>Bo</option>
+            <option>Poco</option>
+            <option>Mortis</option>
+            <option>El Primo</option>
+            <option>Nita</option>
+            <option>Jessie</option>
+            <option>Barley</option>
+            <option>Rico</option>
+            <option>Brock</option>
+        </select>
+
+
+        <label for="startLevel">Current Level (1-10):</label>
+        <input type="number" id="startLevel" min="1" max="10" value="1">
+
+        <label for="endLevel">Target Level (2-11):</label>
+        <input type="number" id="endLevel" min="2" max="11" value="11">
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div class="result">
+            <p id="totalPowerPoints"><img src="Power_Points.png" alt="Power Points Icon"> Total Power Points Needed: <span id="powerPointsValue">0</span></p>
+            <p id="totalCoins"><img src="coins.png" alt="Coins Icon"> Total Coins Needed: <span id="coinsValue">0</span></p>
+            <p id="totalCoinsWithHypercharge" style="display:none;"><img src="hypercharge.png" alt="Coins Icon"> Total Coins with Hypercharge: <span id="coinsWithHyperchargeValue">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        const upgradeData = {
+            2: { powerPoints: 20, coins: 20 },
+            3: { powerPoints: 30, coins: 35 },
+            4: { powerPoints: 50, coins: 75 },
+            5: { powerPoints: 80, coins: 140 },
+            6: { powerPoints: 130, coins: 290 },
+            7: { powerPoints: 210, coins: 480 },
+            8: { powerPoints: 340, coins: 800 },
+            9: { powerPoints: 550, coins: 1250 },
+            10: { powerPoints: 890, coins: 1875 },
+            11: { powerPoints: 1440, coins: 2800 }
+        };
+
+        const hyperchargeBrawlers = ["Shelly", "Colt", "Spike", "Bull", "Jacky", "Pearl", "Rosa", "Maisie", "Lou", "Colette", "Charlie", "Dynamike", "Edgar", "Fang", "Leon", "Crow", "Mico", "Cordelius"];
+
+        function calculate() {
+            const brawler = document.getElementById('brawler').value;
+            const startLevel = parseInt(document.getElementById('startLevel').value);
+            const endLevel = parseInt(document.getElementById('endLevel').value);
+
+            let totalPowerPoints = 0;
+            let totalCoins = 0;
+
+            for (let level = startLevel + 1; level <= endLevel; level++) {
+                totalPowerPoints += upgradeData[level].powerPoints;
+                totalCoins += upgradeData[level].coins;
+            }
+
+            document.getElementById('powerPointsValue').innerText = totalPowerPoints;
+            document.getElementById('coinsValue').innerText = totalCoins;
+
+            if (hyperchargeBrawlers.includes(brawler)) {
+                const totalCoinsWithHypercharge = totalCoins + 5000;
+                document.getElementById('coinsWithHyperchargeValue').innerText = totalCoinsWithHypercharge;
+                document.getElementById('totalCoinsWithHypercharge').style.display = 'block';
+            } else {
+                document.getElementById('totalCoinsWithHypercharge').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
