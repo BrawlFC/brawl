@@ -50,8 +50,8 @@
             font-size: 18px;
         }
 
-        .calculator select,
-        .calculator input {
+        .calculator input,
+        .calculator select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -131,6 +131,9 @@
         </div>
 
         <h1>Brawler Upgrade Calculator</h1>
+
+        <label for="brawlerSearch">Search Brawler:</label>
+        <input type="text" id="brawlerSearch" onkeyup="filterBrawlers()" placeholder="Type to search...">
 
         <label for="brawler">Select Brawler:</label>
         <select id="brawler">
@@ -221,7 +224,6 @@
             <option>Brock</option>
         </select>
 
-
         <label for="startLevel">Current Level (1-10):</label>
         <input type="number" id="startLevel" min="1" max="10" value="1">
 
@@ -251,13 +253,40 @@
             11: { powerPoints: 1440, coins: 2800 }
         };
 
-        const hyperchargeBrawlers = ["Shelly", "Colt", "Spike", "Bull", "Jacky", "Pearl", "Rosa", "Maisie", "Lou", "Colette", "Charlie", "Dynamike", "Edgar", "Fang", "Leon", "Crow", "Mico", "Cordelius"];
+        const hyperchargeBrawlers = [
+            'Shelly', 'Colt', 'Spike', 'Bull', 'Jacky', 'Pearl',
+            'Rosa', 'Maisie', 'Lou', 'Colette', 'Charlie', 'Dynamike',
+            'Edgar', 'Fang', 'Leon', 'Crow', 'Mico', 'Cordelius'
+        ];
+
+        function filterBrawlers() {
+            const input = document.getElementById("brawlerSearch").value.toLowerCase();
+            const select = document.getElementById("brawler");
+            const options = select.options;
+
+            let hasVisibleOptions = false;
+            for (let i = 0; i < options.length; i++) {
+                const optionText = options[i].text.toLowerCase();
+                if (optionText.includes(input)) {
+                    options[i].style.display = "";  // Show the option
+                    hasVisibleOptions = true;
+                } else {
+                    options[i].style.display = "none";  // Hide the option
+                }
+            }
+
+            // Automatically select the first visible option
+            if (hasVisibleOptions) {
+                select.value = [...options].find(option => option.style.display !== "none").value;
+            } else {
+                select.value = "";
+            }
+        }
 
         function calculate() {
-            const brawler = document.getElementById('brawler').value;
-            const startLevel = parseInt(document.getElementById('startLevel').value);
-            const endLevel = parseInt(document.getElementById('endLevel').value);
-
+            const brawler = document.getElementById("brawler").value;
+            const startLevel = parseInt(document.getElementById("startLevel").value);
+            const endLevel = parseInt(document.getElementById("endLevel").value);
             let totalPowerPoints = 0;
             let totalCoins = 0;
 
@@ -266,15 +295,15 @@
                 totalCoins += upgradeData[level].coins;
             }
 
-            document.getElementById('powerPointsValue').innerText = totalPowerPoints;
-            document.getElementById('coinsValue').innerText = totalCoins;
+            document.getElementById("powerPointsValue").innerText = totalPowerPoints;
+            document.getElementById("coinsValue").innerText = totalCoins;
 
-            if (hyperchargeBrawlers.includes(brawler)) {
+            if (endLevel === 11 && hyperchargeBrawlers.includes(brawler)) {
                 const totalCoinsWithHypercharge = totalCoins + 5000;
-                document.getElementById('coinsWithHyperchargeValue').innerText = totalCoinsWithHypercharge;
-                document.getElementById('totalCoinsWithHypercharge').style.display = 'block';
+                document.getElementById("totalCoinsWithHypercharge").style.display = "block";
+                document.getElementById("coinsWithHyperchargeValue").innerText = totalCoinsWithHypercharge;
             } else {
-                document.getElementById('totalCoinsWithHypercharge').style.display = 'none';
+                document.getElementById("totalCoinsWithHypercharge").style.display = "none";
             }
         }
     </script>
