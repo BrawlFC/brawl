@@ -27,6 +27,27 @@
             height: 100vh;
             margin: 0;
         }
+        .Gadget-description {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #00FF00;
+        }
+        .Gear-description {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #3ea9de;
+        }
+        .Starpower-description {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #FFD700;
+        }
+
+        .icon {
+            width: 20px; /* Adjust the size as needed */
+            vertical-align: middle;
+            margin-right: 8px; /* Space between the image and text */
+        }
 
         .calculator {
             background-color: var(--secondary-color);
@@ -48,6 +69,9 @@
             margin-bottom: 8px;
             color: var(--primary-color);
             font-size: 18px;
+            display: flex;
+            align-items: center; /* Center align items vertically */
+            justify-content: center; /* Center align items horizontally */
         }
 
         .calculator input,
@@ -102,6 +126,11 @@
 
         .logo img {
             width: 100px;
+        }
+        .priceTag {
+            margin-left: 10px;
+            color: var(--primary-color); /* Adjust color to match your theme */
+            font-weight: bold;
         }
 
         /* Media Query for Responsive Design */
@@ -230,6 +259,42 @@
         <label for="endLevel">Target Level (2-11):</label>
         <input type="number" id="endLevel" min="2" max="11" value="11">
 
+        <!-- Gadget Select -->
+        <label for="gadgetSelect">
+            <img src="gadget-icon.png" alt="Gadget Icon" class="icon"> Gadget:
+        </label>
+        <select id="gadgetSelect" onchange="updateDescription('gadgetSelect', 'gadgetDescription', 'gadgetImage')">
+            <option value="None">None</option>
+        </select>
+        <div id="gadgetDescription" class="Gadget-description"></div>
+
+        <!-- Gear Select 1 -->
+        <label for="gearSelect1">
+            <img src="gear-icon.png" alt="Gear Icon" class="icon"> Gear 1:
+        </label>
+        <select id="gearSelect1" onchange="updateDescription('gearSelect1', 'gear1Description', 'gear1Image')">
+            <option value="None">None</option>
+        </select>
+        <div id="gear1Description" class="Gear-description"></div>
+
+        <!-- Gear Select 2 -->
+        <label for="gearSelect2">
+            <img src="gear-icon.png" alt="Gear Icon" class="icon"> Gear 2:
+        </label>
+        <select id="gearSelect2" onchange="updateDescription('gearSelect2', 'gear2Description', 'gear2Image')">
+            <option value="None">None</option>
+        </select>
+        <div id="gear2Description" class="Gear-description"></div>
+
+        <!-- Star Power Select -->
+        <label for="starPowerSelect">
+            <img src="starPower-icon.png" alt="Star Power Icon" class="icon"> Star Power:
+        </label>
+        <select id="starPowerSelect" onchange="updateDescription('starPowerSelect', 'starPowerDescription', 'starPowerImage')">
+            <option value="None">None</option>
+        </select>
+        <div id="starPowerDescription" class="Starpower-description"></div>
+
         <button onclick="calculate()">Calculate</button>
 
         <div class="result">
@@ -239,73 +304,6 @@
         </div>
     </div>
 
-    <script>
-        const upgradeData = {
-            2: { powerPoints: 20, coins: 20 },
-            3: { powerPoints: 30, coins: 35 },
-            4: { powerPoints: 50, coins: 75 },
-            5: { powerPoints: 80, coins: 140 },
-            6: { powerPoints: 130, coins: 290 },
-            7: { powerPoints: 210, coins: 480 },
-            8: { powerPoints: 340, coins: 800 },
-            9: { powerPoints: 550, coins: 1250 },
-            10: { powerPoints: 890, coins: 1875 },
-            11: { powerPoints: 1440, coins: 2800 }
-        };
-
-        const hyperchargeBrawlers = [
-            'Shelly', 'Colt', 'Spike', 'Bull', 'Jacky', 'Pearl',
-            'Rosa', 'Maisie', 'Lou', 'Colette', 'Charlie', 'Dynamike',
-            'Edgar', 'Fang', 'Leon', 'Crow', 'Mico', 'Cordelius'
-        ];
-
-        function filterBrawlers() {
-            const input = document.getElementById("brawlerSearch").value.toLowerCase();
-            const select = document.getElementById("brawler");
-            const options = select.options;
-
-            let hasVisibleOptions = false;
-            for (let i = 0; i < options.length; i++) {
-                const optionText = options[i].text.toLowerCase();
-                if (optionText.includes(input)) {
-                    options[i].style.display = "";  // Show the option
-                    hasVisibleOptions = true;
-                } else {
-                    options[i].style.display = "none";  // Hide the option
-                }
-            }
-
-            // Automatically select the first visible option
-            if (hasVisibleOptions) {
-                select.value = [...options].find(option => option.style.display !== "none").value;
-            } else {
-                select.value = "";
-            }
-        }
-
-        function calculate() {
-            const brawler = document.getElementById("brawler").value;
-            const startLevel = parseInt(document.getElementById("startLevel").value);
-            const endLevel = parseInt(document.getElementById("endLevel").value);
-            let totalPowerPoints = 0;
-            let totalCoins = 0;
-
-            for (let level = startLevel + 1; level <= endLevel; level++) {
-                totalPowerPoints += upgradeData[level].powerPoints;
-                totalCoins += upgradeData[level].coins;
-            }
-
-            document.getElementById("powerPointsValue").innerText = totalPowerPoints;
-            document.getElementById("coinsValue").innerText = totalCoins;
-
-            if (endLevel === 11 && hyperchargeBrawlers.includes(brawler)) {
-                const totalCoinsWithHypercharge = totalCoins + 5000;
-                document.getElementById("totalCoinsWithHypercharge").style.display = "block";
-                document.getElementById("coinsWithHyperchargeValue").innerText = totalCoinsWithHypercharge;
-            } else {
-                document.getElementById("totalCoinsWithHypercharge").style.display = "none";
-            }
-        }
-    </script>
+    <script src="script2.js"></script>
 </body>
 </html>
